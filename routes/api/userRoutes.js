@@ -8,8 +8,7 @@ const {
     deleteUser,
     addFriend,
     deleteFriend,
-//TODO fill in controller route for user
-} = require('');
+} = require('../../controllers/userController');
 
 // TODO fill in the api routes in comments
 router.route('/')
