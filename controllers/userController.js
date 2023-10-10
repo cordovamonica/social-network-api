@@ -59,29 +59,30 @@ getSingleUser(req, res) {
   // adds a friend
   addFriend(req, res) {
     User.findOneAndUpdate(
-      { _id: req.params.userId },
+      { _id: req.params.id },
       { $addToSet: { friends: req.params.friendId } },
-      { runValidators: true, new: true }
-    )
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No user found with this id!" })
-          : res.json(user)
-      )
+      { new: true })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).json({ message: "No user found with this id!" });
+        }
+        res.json(user)
+      })
       .catch((err) => res.status(500).json(err));
-  },
+    },
   // deletes a friend
   deleteFriend(req, res) {
     User.findOneAndUpdate(
-      { _id: req.params.userId },
+      { _id: req.params.id },
       { $pull: { friends: req.params.friendId } },
-      { runValidators: true, new: true }
-    )
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No user found with this id!" })
-          : res.json(user)
-      )
+      { new: true })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).json({ message: "No user found with this id!" });
+        }
+        res.json(user)
+      })
       .catch((err) => res.status(500).json(err));
-  },
+  }
 };
+        
