@@ -8,18 +8,23 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   //gets a single user
-  getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
-      .populate("thoughts")
-      .populate("friends")
-      .select("-__v")
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No user found with this id!" })
-          : res.json(user)
-      )
-      .catch((err) => res.status(500).json(err));
-  },
+getSingleUser(req, res) {
+  User.findOne({ _id: req.params.id })
+    .select("-__v")
+    .populate("friends")
+    .populate("thoughts")
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({ message: "No user found with this id!" });
+        return;
+      }
+      res.json(user);
+    }
+    )
+    .catch((err) => res.status(500).json(err));
+},
+
+ 
   // creates a user
   createUser(req, res) {
     User.create(req.body)
@@ -42,7 +47,7 @@ module.exports = {
   },
   // deletes a user
   deleteUser(req, res) {
-    User.findOneAndDelete({ _id: req.params.userId })
+    User.findOneAndDelete({ _id: req.params.id })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found with this id!" })

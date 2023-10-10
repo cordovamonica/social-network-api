@@ -10,12 +10,11 @@ const {
     deleteFriend,
 } = require('../../controllers/userController');
 
-// TODO fill in the api routes in comments
-router.route('/')
+router.route('/') // api/users
 .get(getUser)
 .post(createUser);
 
-router.route('/:id')
+router.route('/:id') // api/users/:id
 .get(getSingleUser)
 .put(updateUser)
 .delete(deleteUser);
