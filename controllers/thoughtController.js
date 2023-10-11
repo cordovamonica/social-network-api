@@ -30,17 +30,16 @@ createThought(req, res) {
 
   //gets a single thought
 getSingleThought(req, res) {
-  Thought.findOne({ _id: req.params.thoughtId})
-  .select("-__v")
-  .populate("reactions")
-  .then((thought) => {
-    if (!thought) {
-      res.status(404).json({ message: "No thought found with this id!" });
-      return;
+  Thought.findOne({ _id: req.params.thoughtId })
+    .then((thought) => {
+      if (!thought) {
+        res.status(404).json({ message: "No thought found with this id!" });
+        return;
+      }
+      res.json(thought);
     }
-    res.json(thought);
-  })
-  .catch((err) => res.status(500).json(err));
+    )
+    .catch((err) => res.status(500).json(err));
 },
 
 // update thought
