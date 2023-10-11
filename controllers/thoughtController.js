@@ -30,18 +30,15 @@ createThought(req, res) {
 
   //gets a single thought
 getSingleThought(req, res) {
-  Thought.findOne({ _id: req.params.thoughtId })
-    .then((thought) => {
-      if (!thought) {
-        res.status(404).json({ message: "No thought found with this id!" });
-        return;
-      }
-      res.json(thought);
-    }
-    )
-    .catch((err) => res.status(500).json(err));
+ Thought.findOne({ _id: req.params.thoughtId })
+ .then((thought) => {
+  if (!thought) {
+    return res.status(404).json({ message: "No thought found with this id!" });
+  }
+  res.json(thought)}
+)
+.catch((err) => res.status(500).json(err));
 },
-
 // update thought
 updateThought(req, res) {
   Thought.findOneAndUpdate(
@@ -61,11 +58,13 @@ updateThought(req, res) {
 // delete thought
 deleteThought(req, res) {
   Thought.findOneAndDelete({ _id: req.params.thoughtId })
-  .then((thought) => {
-    if (!thought) {
-      return res.status(404).json({ message: "No thought found with this id!" });
-    }
-  })
+    .then((thought) =>{
+      if (!thought) {
+        return res.status(404).json({ message: "No thought found with this id!" });
+      }
+      res.json(thought)}
+    )
+    .catch((err) => res.status(500).json(err));
 },
 
 // add reaction

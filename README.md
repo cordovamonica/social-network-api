@@ -4,6 +4,10 @@
 ## Description
 A social network backend that allows users to create a username, post thoughts, react to thoughts and add  or delete friends.
 
+## Demo
+The following video demonstrates starting the server, creating/updating/deleting user, adding/deleting friends:
+https://drive.google.com/file/d/1NC_sCQnZZsSiQegJwto5XXUa9kTCr1qe/view?usp=drive_link
+
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
